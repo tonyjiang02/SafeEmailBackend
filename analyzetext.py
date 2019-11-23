@@ -35,6 +35,3 @@ def analyze_attributes(text, attributes, threshold=0.7):
       results.append(False)
 
   return results, probabilities
-
-if __name__ == "__main__":
-  print(analyze_attributes('i hate you', ["toxicity", "severe_toxicity", "IDENTITY_ATTACK", "INSUlT"]))
