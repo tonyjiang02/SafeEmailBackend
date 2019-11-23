@@ -20,11 +20,10 @@ def probability_of(text, attribute="TOXICITY"):
 
   return probability
 
-def analyze_attributes(text, attributes, threshold=0.7):
+def analyze_attributes(text, attributes=["toxicity"], threshold=0.7):
   results = []
   probabilities = []
 
-  # give function lists of attributes
   for attribute in attributes:
     prob = probability_of(text, attribute)
     probabilities.append(prob)
