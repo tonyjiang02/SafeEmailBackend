@@ -34,9 +34,7 @@ def message_send():
         else:
             # TODO: DB lookup recipient's squad's emails using `to_id`
             squad_emails = ['squaddtalk@gmail.com']
-            for a in squad_emails:
-                email_util.send_email(a, f'Approval for Message from {from_name} to {to_name}', msg,
-                                      '<p>msg</p>')
+            email_util.send_squad_approval(squad_emails, msg, to_name, from_name, to_id, from_id, from_email)
 
     threading.Thread(target=inner, daemon=True).start()
 
@@ -64,6 +62,7 @@ def send(msg, to_id, from_id, from_email):
     to_name = 'Albert'
     from_name = 'Tony'
 
+    email_util.send_message(msg, to_name, email, from_id, from_email)
     email_util.send_email(email, f'Message from {from_name}', msg, f'<p>{msg}</p>')
 
 

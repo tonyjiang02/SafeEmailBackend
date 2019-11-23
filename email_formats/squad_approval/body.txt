@@ -1,0 +1,15 @@
+Please determine if the following message from {from_name} to {to_name} should be approved.
+
+    {msg}
+
+Click on one of the following links to approve or reject the message.
+
+Approve: {approve_url}
+
+Reject: {reject_url}
+
+Why are you seeing this? {to_name} added you to their Squad to help them feel safe online. Our algorithms determined this message amounts to harassment, but we wanted a second opinion.
+
+Thanks!
+
+SquadTalk
