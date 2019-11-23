@@ -1,7 +1,6 @@
 import os
 
-import requests
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect
 import threading
 from firebase_admin import credentials, firestore, initialize_app
 import email_util
@@ -44,12 +43,12 @@ def message_send():
     return {}
 
 
-@app.route('/approve', methods=('POST',))
+@app.route('/approve')
 def approve():
-    msg = request.form['msg']
-    to_id = request.form['to_id']
-    from_id = request.form['from_id']
-    from_email = request.form['from_email']
+    msg = request.args['msg']
+    to_id = request.args['to_id']
+    from_id = request.args['from_id']
+    from_email = request.args['from_email']
 
     send(msg, to_id, from_id, from_email)
 
