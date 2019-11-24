@@ -21,14 +21,15 @@ users = db.collection('users')
 def message_send():
     msg = request.form['msg']
     to_id = request.form['to_id']
-    from_id = request.form['from_id']
     from_email = request.form['from_email']
+
+    from_id = user_from_email(from_email)['id']
 
     def inner():
         user = user_from_id(to_id)
 
         categories = ['TOXICITY', 'SEVERE_TOXICITY', 'INSULT', 'PROFANITY', 'THREAT', 'SEXUALLY_EXPLICIT']
-        categories = [v for v in categories if user[v.lower()]]
+        # categories = [v for v in categories if user[v.lower()]]
         ml_approved, probabilities = ml_approve.approval_request(msg, categories)
 
         if ml_approved:
@@ -72,6 +73,14 @@ def user_from_id(id_):
     for u in users.stream():
         d = u.to_dict()
         if d['id'] == id_:
+            return d
+
+
+def user_from_email(email):
+    for u in users.stream():
+        d = u.to_dict()
+        print(d, email)
+        if d['email'] == email:
             return d
 
 
