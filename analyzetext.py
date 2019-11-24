@@ -14,17 +14,17 @@ def probability_of(text, attribute="TOXICITY"):
   }
 
   response = service.comments().analyze(body=analyze_request).execute()
+
+  # get prob
   probability = float(response["attributeScores"][attribute.upper()]["summaryScore"]["value"]);
-  
-  print(attribute + " probability of '" + text + "': " + str(probability*100) + "%")
 
   return probability
 
-def analyze_attributes(text, attributes, threshold=0.7):
+def analyze_attributes(text, attributes=["toxicity"], threshold=0.7):
+  # returning two lists, one with all results and one with probs
   results = []
   probabilities = []
 
-  # give function lists of attributes
   for attribute in attributes:
     prob = probability_of(text, attribute)
     probabilities.append(prob)

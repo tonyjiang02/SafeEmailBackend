@@ -4,6 +4,7 @@ from flask import Flask, request, redirect
 import threading
 from firebase_admin import credentials, firestore, initialize_app
 import email_util
+import ml_approve
 
 app = Flask(__name__)
 
@@ -23,8 +24,7 @@ def message_send():
     from_email = request.form['from_email']
 
     def inner():
-        # TODO: use ML to check sentiment of `msg`
-        ml_approved = False
+        ml_approved = ml_approve.approval_request(msg)        
 
         # TODO: DB lookup names of `to_id` and `from_id`
         to_name = 'Albert'
