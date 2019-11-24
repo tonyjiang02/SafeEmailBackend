@@ -13,7 +13,7 @@ email_util.init()
 cred = credentials.Certificate('key.json')
 default_app = initialize_app(cred)
 db = firestore.client()
-
+users = db.collection('users')
 
 @app.route('/message_send', methods=('POST',))
 def message_send():
