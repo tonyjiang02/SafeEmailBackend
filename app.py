@@ -25,13 +25,18 @@ def message_send():
     from_email = request.form['from_email']
 
     def inner():
-        ml_approved = ml_approve.approval_request(msg)
+        user = user_from_id(to_id)
+
+        categories = ['TOXICITY', 'SEVERE_TOXICITY', 'INSULT', 'PROFANITY', 'THREAT', 'SEXUALLY_EXPLICIT']
+        categories = [v for v in categories if user[v.lower()]]
+        ml_approved, probabilities = ml_approve.approval_request(msg, categories)
 
         if ml_approved:
             send(msg, to_id, from_id, from_email)
         else:
             squad_emails = user_from_id(to_id)['friends']
-            email_util.send_squad_approval(squad_emails, msg, to_id, from_id, from_email)
+            email_util.send_squad_approval(squad_emails, msg, to_id, from_id, from_email,
+                                           zip(categories, probabilities))
 
     threading.Thread(target=inner, daemon=True).start()
 

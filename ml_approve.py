@@ -1,11 +1,11 @@
 import analyzetext
 
 
-def approval_request(msg):
-    text_results, text_probabilities = analyzetext.analyze_attributes(msg, ["toxicity"])
+def approval_request(msg, categories):
+    text_results, text_probabilities = analyzetext.analyze_attributes(msg, categories)
 
     for result in text_results:
         if result:
-            return False
+            return False, text_probabilities
 
-    return True
+    return True, text_probabilities

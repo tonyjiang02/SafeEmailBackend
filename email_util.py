@@ -48,13 +48,22 @@ def send_email(to, subject, txt, html=''):
     server.sendmail(sender, [to], msg.as_string())
 
 
-def send_squad_approval(squad_emails, msg, to_id, from_id, from_email):
+categories_trans = {'TOXICITY': 'Toxic',
+                    'SEVERE_TOXICITY': 'Very Toxic',
+                    'INSULT': 'Insult',
+                    'PROFANITY': 'Profanity',
+                    'THREAT': 'Threat',
+                    'SEXUALLY_EXPLICIT': 'Inappropriate'}
+
+
+def send_squad_approval(squad_emails, msg, to_id, from_id, from_email, probabilities):
     payload = {'msg': msg, 'to_id': to_id, 'from_id': from_id, 'from_email': from_email}
     approve_url = f'http://localhost:5000/approve?{urlencode(payload)}'
     reject_url = 'http://localhost:5000/reject'
 
+    probabilities = {categories_trans[k]: int(v * 100) for k, v in probabilities}
     format_map = {'msg': msg, 'approve_url': approve_url, 'from_id': from_id, 'to_id': to_id,
-                  'reject_url': reject_url}
+                  'reject_url': reject_url, 'probabilities': probabilities}
     txt = formats['squad']['txt'].render(**format_map)
     html = formats['squad']['html'].render(**format_map)
 
