@@ -1,18 +1,16 @@
 import smtplib
+import ssl
+from email.message import EmailMessage
 from urllib.parse import urlencode
-
 from mako.template import Template
-from sendgrid import SendGridAPIClient, Mail
 
-smtp_server = 'smtp.semdgrid.net'
+smtp_server = 'smtp.gmail.com'
 
 server: smtplib.SMTP_SSL
 
 sender: str
 
 backend_ip = '192.168.137.28:8080'
-
-sg = SendGridAPIClient('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')
 
 
 def read(file):
@@ -27,14 +25,29 @@ formats = {'squad': {'txt': Template(filename='email_formats/squad_approval/body
            }
 
 
+def init():
+    with open('gmail_auth') as f:
+        global sender
+        sender = f.readline()
+        password = f.readline()
+
+    global server
+    context = ssl.create_default_context()
+    server = smtplib.SMTP_SSL(smtp_server, 465, context=context)
+    server.login(sender, password)
+
+
 def send_email(to, subject, txt, html=''):
-    message = Mail(
-        from_email='approval@squadtalk.tech',
-        to_emails=to,
-        subject=subject,
-        html_content=html,
-        plain_text_content=txt)
-    sg.send(message)
+    msg = EmailMessage()
+    msg.set_content(txt)
+    if html:
+        msg.add_alternative(html, subtype='html')
+
+    msg['Subject'] = subject
+    msg['To'] = to
+    msg['From'] = sender
+
+    server.sendmail(sender, [to], msg.as_string())
 
 
 categories_trans = {'TOXICITY': 'Toxic',
@@ -74,4 +87,5 @@ def close():
 
 if __name__ == '__main__':
     # testing
+    init()
     send_email('squaddtalk@gmail.com', 'test', 'test', '<h1>test</h1>')
