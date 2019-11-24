@@ -9,6 +9,3 @@ def approval_request(msg):
             return False
     
     return True
-
-if __name__ == "__main__":
-    approval_request("you suck")
