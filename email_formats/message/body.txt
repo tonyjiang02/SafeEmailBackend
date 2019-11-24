@@ -1,4 +1,4 @@
-Hi {to_name}! Message from {from_name}:
+Hi {to_id}! Message from {from_id}:
 
     {msg}
 

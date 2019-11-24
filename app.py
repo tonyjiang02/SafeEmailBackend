@@ -16,6 +16,7 @@ default_app = initialize_app(cred)
 db = firestore.client()
 users = db.collection('users')
 
+
 @app.route('/message_send', methods=('POST',))
 def message_send():
     msg = request.form['msg']
@@ -24,17 +25,14 @@ def message_send():
     from_email = request.form['from_email']
 
     def inner():
-        ml_approved = ml_approve.approval_request(msg)        
+        ml_approved = ml_approve.approval_request(msg)
 
-        # TODO: DB lookup names of `to_id` and `from_id`
-        to_name = 'Albert'
-        from_name = 'Tony'
         if ml_approved:
             send(msg, to_id, from_id, from_email)
         else:
             # TODO: DB lookup recipient's squad's emails using `to_id`
             squad_emails = ['squaddtalk@gmail.com']
-            email_util.send_squad_approval(squad_emails, msg, to_name, from_name, to_id, from_id, from_email)
+            email_util.send_squad_approval(squad_emails, msg, to_id, from_id, from_email)
 
     threading.Thread(target=inner, daemon=True).start()
 
@@ -58,12 +56,7 @@ def send(msg, to_id, from_id, from_email):
     # TODO: DB lookup recipient's email using `to_id`
     email = 'squaddtalk@gmail.com'
 
-    # TODO: DB lookup names of `to_id` and `from_id`
-    to_name = 'Albert'
-    from_name = 'Tony'
-
-    email_util.send_message(msg, to_name, email, from_id, from_email)
-    email_util.send_email(email, f'Message from {from_name}', msg, f'<p>{msg}</p>')
+    email_util.send_message(msg, to_id, email, from_id, from_email)
 
 
 @app.route('/reject')

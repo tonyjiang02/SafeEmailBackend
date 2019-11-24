@@ -1,4 +1,4 @@
-Please determine if the following message from {from_name} to {to_name} should be approved.
+Please determine if the following message from {from_id} to {to_id} should be approved.
 
     {msg}
 
@@ -8,7 +8,7 @@ Approve: {approve_url}
 
 Reject: {reject_url}
 
-Why are you seeing this? {to_name} added you to their Squad to help them feel safe online. Our algorithms determined this message amounts to harassment, but we wanted a second opinion.
+Why are you seeing this? {to_id} added you to their Squad to help them feel safe online. Our algorithms determined this message amounts to harassment, but we wanted a second opinion.
 
 Thanks!
 
