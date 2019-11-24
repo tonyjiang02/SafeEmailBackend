@@ -4,7 +4,7 @@ from flask import Flask, request
 import threading
 from firebase_admin import credentials, firestore, initialize_app
 import email_util
-import analyzetext
+import ml_approve
 
 app = Flask(__name__)
 
@@ -24,8 +24,8 @@ def message_send():
     from_email = request.form['from_email']
 
     def send():
-        # TODO: use ML to check sentiment of `msg`
-        ml_approved = analyzetext.analyze_attributes(msg, ["toxicity"])
+        ml_approved = ml_approve.approval_request(msg)        
+                
 
         # TODO: DB lookup recipient's email using `to_id`
         email = 'squaddtalk@gmail.com'
