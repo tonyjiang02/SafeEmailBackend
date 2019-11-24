@@ -10,7 +10,7 @@ server: smtplib.SMTP_SSL
 
 sender: str
 
-backend_ip = '192.168.137.28:8080'
+backend_ip = 'summer-lexicon-260008.appspot.com'
 
 
 def read(file):
