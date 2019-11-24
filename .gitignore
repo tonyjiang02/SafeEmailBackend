@@ -226,4 +226,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+Include/
+LICENSE.txt
+Scripts/
+SquadTalk-Backend/
+tcl/
+
 exec*-l /
