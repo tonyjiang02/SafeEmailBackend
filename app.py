@@ -11,8 +11,6 @@ import ml_approve
 app = Flask(__name__)
 cors = CORS(app)
 
-email_util.init()
-
 # Initialize Firestore DB
 cred = credentials.Certificate('key.json')
 default_app = initialize_app(cred)
