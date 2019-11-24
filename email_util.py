@@ -10,6 +10,8 @@ server: smtplib.SMTP_SSL
 
 sender: str
 
+backend_ip = '192.168.137.28:8080'
+
 
 def read(file):
     with open(file) as f:
@@ -58,8 +60,8 @@ categories_trans = {'TOXICITY': 'Toxic',
 
 def send_squad_approval(squad_emails, msg, to_id, from_id, from_email, probabilities):
     payload = {'msg': msg, 'to_id': to_id, 'from_id': from_id, 'from_email': from_email}
-    approve_url = f'http://localhost:5000/approve?{urlencode(payload)}'
-    reject_url = 'http://localhost:5000/reject'
+    approve_url = f'http://{backend_ip}/approve?{urlencode(payload)}'
+    reject_url = f'http://{backend_ip}/reject'
 
     probabilities = {categories_trans[k]: int(v * 100) for k, v in probabilities}
     format_map = {'msg': msg, 'approve_url': approve_url, 'from_id': from_id, 'to_id': to_id,

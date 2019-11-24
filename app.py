@@ -3,10 +3,13 @@ import os
 from flask import Flask, request, redirect
 import threading
 from firebase_admin import credentials, firestore, initialize_app
+from flask_cors import CORS
+
 import email_util
 import ml_approve
 
 app = Flask(__name__)
+cors = CORS(app)
 
 email_util.init()
 
@@ -79,7 +82,6 @@ def user_from_id(id_):
 def user_from_email(email):
     for u in users.stream():
         d = u.to_dict()
-        print(d, email)
         if d['email'] == email:
             return d
 
