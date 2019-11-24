@@ -6,10 +6,6 @@ from mako.template import Template
 
 smtp_server = 'smtp.gmail.com'
 
-server: smtplib.SMTP_SSL
-
-sender: str
-
 backend_ip = 'summer-lexicon-260008.appspot.com'
 
 
@@ -24,17 +20,13 @@ formats = {'squad': {'txt': Template(filename='email_formats/squad_approval/body
                        'html': Template(filename='email_formats/message/body.html', input_encoding='utf-8')}
            }
 
+with open('gmail_auth') as f:
+    sender = f.readline()
+    password = f.readline()
+
 
 def init():
-    with open('gmail_auth') as f:
-        global sender
-        sender = f.readline()
-        password = f.readline()
-
-    global server
-    context = ssl.create_default_context()
-    server = smtplib.SMTP_SSL(smtp_server, 465, context=context)
-    server.login(sender, password)
+    pass
 
 
 def send_email(to, subject, txt, html=''):
@@ -47,7 +39,11 @@ def send_email(to, subject, txt, html=''):
     msg['To'] = to
     msg['From'] = sender
 
-    server.sendmail(sender, [to], msg.as_string())
+    context = ssl.create_default_context()
+    with smtplib.SMTP_SSL(smtp_server, 465, context=context) as server:
+        server.login(sender, password)
+
+        server.sendmail(sender, [to], msg.as_string())
 
 
 categories_trans = {'TOXICITY': 'Toxic',
