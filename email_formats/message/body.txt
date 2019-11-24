@@ -1,0 +1,9 @@
+Hi {to_name}! Message from {from_name}:
+
+    {msg}
+
+You can reply to them at {from_email}.
+
+This message was approved by SquadTalk algorithms and your Squad.
+
+SquadTalk
