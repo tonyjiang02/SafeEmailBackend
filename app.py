@@ -30,8 +30,7 @@ def message_send():
         if ml_approved:
             send(msg, to_id, from_id, from_email)
         else:
-            # TODO: DB lookup recipient's squad's emails using `to_id`
-            squad_emails = ['squaddtalk@gmail.com']
+            squad_emails = user_from_id(to_id)['friends']
             email_util.send_squad_approval(squad_emails, msg, to_id, from_id, from_email)
 
     threading.Thread(target=inner, daemon=True).start()
@@ -53,8 +52,7 @@ def approve():
 
 
 def send(msg, to_id, from_id, from_email):
-    # TODO: DB lookup recipient's email using `to_id`
-    email = 'squaddtalk@gmail.com'
+    email = user_from_id(to_id)['email']
 
     email_util.send_message(msg, to_id, email, from_id, from_email)
 
@@ -63,6 +61,13 @@ def send(msg, to_id, from_id, from_email):
 def reject():
     # TODO: redirect to page on frontend
     return redirect('https://google.com')
+
+
+def user_from_id(id_):
+    for u in users.stream():
+        d = u.to_dict()
+        if d['id'] == id_:
+            return d
 
 
 port = int(os.environ.get('PORT', 8080))
