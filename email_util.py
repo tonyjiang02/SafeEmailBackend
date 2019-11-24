@@ -52,10 +52,12 @@ def send_email(to, subject, txt, html=''):
 
 categories_trans = {'TOXICITY': 'Toxic',
                     'SEVERE_TOXICITY': 'Very Toxic',
+                    'IDENTITY_ATTACK': 'Identity Attack',
                     'INSULT': 'Insult',
                     'PROFANITY': 'Profanity',
                     'THREAT': 'Threat',
-                    'SEXUALLY_EXPLICIT': 'Inappropriate'}
+                    'SEXUALLY_EXPLICIT': 'Inappropriate',
+                    'FLIRTATION': 'Flirt'}
 
 
 def send_squad_approval(squad_emails, msg, to_id, from_id, from_email, probabilities):

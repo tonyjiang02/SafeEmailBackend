@@ -31,8 +31,9 @@ def message_send():
     def inner():
         user = user_from_id(to_id)
 
-        categories = ['TOXICITY', 'SEVERE_TOXICITY', 'INSULT', 'PROFANITY', 'THREAT', 'SEXUALLY_EXPLICIT']
-        # categories = [v for v in categories if user[v.lower()]]
+        categories = ['TOXICITY', 'SEVERE_TOXICITY', 'IDENTITY_ATTACK', 'INSULT', 'PROFANITY', 'THREAT',
+                      'SEXUALLY_EXPLICIT', 'FLIRTATION']
+        categories = [v for v in categories if user[v.lower()]]
         ml_approved, probabilities = ml_approve.approval_request(msg, categories)
 
         if ml_approved:
