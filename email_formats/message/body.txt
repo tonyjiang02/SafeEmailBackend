@@ -1,9 +1,18 @@
-Hi {to_id}! Message from {from_id}:
+HELLO ${to_id},
 
-    {msg}
+Message from ${from_id}.
 
-You can reply to them at {from_email}.
+    ${msg}
 
-This message was approved by SquadTalk algorithms and your Squad.
+You can reply to them using their id #${from_id} or at ${from_email}. This message was approved by SquadTalk algorithms and your Squad. 
 
-SquadTalk
+SEE YOU AGAIN!
+
+Team SquadTalk
+
+STAY IN TOUCH!
+
+Safe messaging with the Squad.
+
+SquadTalk 2019 © all rights reserved
+

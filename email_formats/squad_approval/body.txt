@@ -1,15 +1,21 @@
-Please determine if the following message from {from_id} to {to_id} should be approved.
+HELLO,
 
-    {msg}
+Please help determine if the following message from ${from_id} to ${to_id} should be approved.
 
-Click on one of the following links to approve or reject the message.
+    ${msg}
 
-Approve: {approve_url}
+Yeah ${approve_url}
 
-Reject: {reject_url}
+Mmmh ${reject_url}
 
-Why are you seeing this? {to_id} added you to their Squad to help them feel safe online. Our algorithms determined this message amounts to harassment, but we wanted a second opinion.
+Why are you seeing this? ${to_id} added you to their Squad to help them feel safe online. Our algorithms determined this message is harmful, but we wanted a second opinion.
 
-Thanks!
+THANK YOU FOR YOUR HELP!
 
-SquadTalk
+Team SquadTalk
+
+STAY IN TOUCH!
+
+Safe Messaging with the Squad.
+SquadTalk 2019 © all rights reserved
+
