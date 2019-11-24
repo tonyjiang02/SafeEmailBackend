@@ -56,8 +56,7 @@ def approve():
 
     send(msg, to_id, from_id, from_email)
 
-    # TODO: redirect to page on frontend
-    return redirect('https://google.com')
+    return redirect('https://squadtalk.tech/sendMessage.html')
 
 
 def send(msg, to_id, from_id, from_email):
@@ -68,8 +67,7 @@ def send(msg, to_id, from_id, from_email):
 
 @app.route('/reject')
 def reject():
-    # TODO: redirect to page on frontend
-    return redirect('https://google.com')
+    return redirect('https://squadtalk.tech/blockMessage.html')
 
 
 def user_from_id(id_):
